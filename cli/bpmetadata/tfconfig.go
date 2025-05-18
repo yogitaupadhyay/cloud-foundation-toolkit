@@ -244,6 +244,8 @@ func parseBlueprintProviderVersions(versionsFile *hcl.File) ([]*ProviderVersion,
 func getBlueprintInterfaces(configPath string) (*BlueprintInterface, error) {
 	//load the configs from the dir path
 	mod, diags := tfconfig.LoadModule(configPath)
+	fmt.Print(mod)
+	Log.Info("\nconfig path: "+ configPath)
 	err := hasTfconfigErrors(diags)
 	if err != nil {
 		return nil, err
@@ -251,6 +253,7 @@ func getBlueprintInterfaces(configPath string) (*BlueprintInterface, error) {
 
 	var variables []*BlueprintVariable
 	for _, val := range mod.Variables {
+		fmt.Print(val)
 		v := getBlueprintVariable(val)
 		variables = append(variables, v)
 	}
